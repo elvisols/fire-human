@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @Getter @Setter
 @Table(name = "hobbies")
-public class Hobby {
+class Hobby {
 
     @Id
     private String keyword;
