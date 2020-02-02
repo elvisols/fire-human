@@ -1,6 +1,6 @@
 -- insert sample persons
-INSERT INTO human_db.persons VALUES (next value for human_db.s_person_id, 'John', 'Smith', 29, 'red', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP );
-INSERT INTO human_db.persons VALUES (next value for human_db.s_person_id, 'Sarah', 'Connor', 54, 'blue', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP );
+INSERT INTO human_db.persons VALUES (next value for human_db.s_person_id, 'John', 'Smith', 'jsmith@fire.com', '$2a$10$0v503h5I1LCoWFs8XAj3eebmDk6fOR86sMp8gEaVJy/SzvxEliTfC', 29, 'red', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP );
+INSERT INTO human_db.persons VALUES (next value for human_db.s_person_id, 'Sarah', 'Connor', 'sconnor@fire.com', '$2a$10$0v503h5I1LCoWFs8XAj3eebmDk6fOR86sMp8gEaVJy/SzvxEliTfC', 54, 'blue', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP );
 
 -- insert sample hobbies
 INSERT INTO human_db.hobbies VALUES ('shopping', 1, 'loves shopping for red apples');

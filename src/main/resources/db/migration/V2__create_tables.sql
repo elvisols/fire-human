@@ -4,6 +4,8 @@ CREATE TABLE human_db.persons (
   id INT AUTO_INCREMENT NOT NULL,
   first_name VARCHAR(50) NOT NULL,
   last_name VARCHAR(50) NOT NULL,
+  email VARCHAR (50) NOT NULL,
+  password VARCHAR (50) NOT NULL,
   age INT NOT NULL,
   color VARCHAR(50) check(color in ('red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet', 'others')),
   created DATETIME,
