@@ -6,6 +6,7 @@ import com.fire.human.model.dto.NewPersonDTO;
 import com.fire.human.model.dto.PersonDTO;
 import com.fire.human.model.dto.mapper.NewPersonMapper;
 import com.fire.human.model.dto.mapper.PersonMapper;
+import com.fire.human.repository.HobbyRepository;
 import com.fire.human.repository.PersonRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -19,14 +20,16 @@ import java.util.Optional;
 public class PersonServiceImpl implements PersonService {
 
     private final PersonRepository personRepository;
+    private final HobbyRepository hobbyRepository;
 //    private final BCryptPasswordEncoder encoder;
     private final PersonMapper personMapper;
     private final NewPersonMapper newPersonMapper;
 
-    public PersonServiceImpl(NewPersonMapper newPersonMapper, PersonMapper personMapper, PersonRepository personRepository) {
+    public PersonServiceImpl(NewPersonMapper newPersonMapper, PersonMapper personMapper, PersonRepository personRepository, HobbyRepository hobbyRepository) {
         this.personRepository = personRepository;
         this.personMapper = personMapper;
         this.newPersonMapper = newPersonMapper;
+        this.hobbyRepository = hobbyRepository;
     }
 
     @Override
@@ -38,6 +41,8 @@ public class PersonServiceImpl implements PersonService {
 //        person.setPassword(encoder.encode(person.getPassword()));
 
         log.info("Saving Person...{} Hobbies: {}", person, person.getHobbies());
+
+        hobbyRepository.saveAll(person.getHobbies());
 
         person = personRepository.save(person);
 
@@ -65,6 +70,8 @@ public class PersonServiceImpl implements PersonService {
         }
 
         log.info("Updating Person ... {}", person);
+
+        hobbyRepository.saveAll(person.getHobbies());
 
         person = personRepository.save(person);
 

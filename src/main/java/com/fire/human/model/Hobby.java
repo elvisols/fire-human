@@ -1,21 +1,21 @@
 package com.fire.human.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Getter @Setter
-@Table(name = "hobbies")
+@NoArgsConstructor
+@Table(name = "hobbies", schema = "human_db")
 public class Hobby {
 
     @Id
     private String keyword;
 
-    private String description;
+    private String description = "n/a";
 
     public Hobby(String keyword) {
         this.keyword = keyword;

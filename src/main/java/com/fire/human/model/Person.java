@@ -1,6 +1,7 @@
 package com.fire.human.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -12,7 +13,8 @@ import java.util.List;
 
 @Entity
 @Getter @Setter
-@Table(name = "persons")
+@NoArgsConstructor
+@Table(name = "persons", schema = "human_db")
 public class Person {
 
     @Id
@@ -37,14 +39,12 @@ public class Person {
 
     @NotBlank(message = "Password field is required")
     private String password;
-//    @Transient
-//    private String confirmPassword;
 
     private Date created;
     private Date modified;
 
-    @ManyToMany(cascade=CascadeType.REFRESH)
-    @JoinTable(name = "person_hobby", joinColumns = {
+    @ManyToMany
+    @JoinTable(name = "person_hobby", schema = "human_db", joinColumns = {
             @JoinColumn(name = "person_id", referencedColumnName = "id") },
             inverseJoinColumns = {
                     @JoinColumn(name = "hobby_id", referencedColumnName = "keyword")
