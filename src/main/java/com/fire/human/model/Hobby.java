@@ -17,10 +17,6 @@ public class Hobby {
 
     private String description;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Person person;
-
     public Hobby(String keyword) {
         this.keyword = keyword;
     }

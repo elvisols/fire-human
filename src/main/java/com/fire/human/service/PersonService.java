@@ -17,7 +17,7 @@ public interface PersonService {
     /**
      * Update person entity
      */
-    PersonDTO save(PersonDTO personDTO);
+    PersonDTO update(PersonDTO personDTO);
 
     /**
      * Get all the persons.
@@ -27,10 +27,10 @@ public interface PersonService {
     /**
      * Get the person by Id.
      */
-    Optional<PersonDTO> findOne(String id);
+    Optional<PersonDTO> findOne(Long id);
 
     /**
      * Delete person by Id.
      */
-    void delete(String id);
+    void delete(Long id);
 }

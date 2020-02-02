@@ -43,7 +43,13 @@ public class Person {
     private Date created;
     private Date modified;
 
-    @OneToMany(cascade=CascadeType.REFRESH, mappedBy = "person", orphanRemoval = true)
+    @ManyToMany(cascade=CascadeType.REFRESH)
+    @JoinTable(name = "person_hobby", joinColumns = {
+            @JoinColumn(name = "person_id", referencedColumnName = "id") },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "hobby_id", referencedColumnName = "keyword")
+            }
+    )
     private List<Hobby> hobbies = new ArrayList<>();
 
     @PrePersist
