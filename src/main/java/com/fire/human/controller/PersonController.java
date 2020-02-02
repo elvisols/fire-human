@@ -2,13 +2,14 @@ package com.fire.human.controller;
 
 
 import com.fire.human.exception.PersonNotFoundException;
-import com.fire.human.model.EColor;
 import com.fire.human.model.dto.NewPersonDTO;
 import com.fire.human.model.dto.PersonDTO;
+import com.fire.human.security.JwtTokenProvider;
 import com.fire.human.service.PersonService;
 import com.fire.human.utils.MapValidationErrorHandler;
 import com.fire.human.utils.NewPersonValidator;
 import com.fire.human.utils.ResponseWrapper;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -17,12 +18,18 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.util.Optional;
+
+import static com.fire.human.security.SecurityConstant.TOKEN_PREFIX;
 
 @Slf4j
 @CrossOrigin
@@ -39,29 +46,28 @@ public class PersonController {
     @Autowired
     private NewPersonValidator newPersonValidator;
 
-//    @Autowired
-//    private JwtTokenProvider tokenProvider;
-//
-//    @Autowired
-//    private AuthenticationManager authenticationManager;
+    @Autowired
+    private JwtTokenProvider tokenProvider;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticate(@Valid @RequestBody LoginRequest loginRequest, BindingResult result){
         ResponseEntity<?> errorMap = mapValidationErrorHandler.MapValidationService(result);
         if(errorMap != null) return errorMap;
 
-//        Authentication authentication = authenticationManager.authenticate(
-//                new UsernamePasswordAuthenticationToken(
-//                        loginRequest.getUsername(),
-//                        loginRequest.getPassword()
-//                )
-//        );
-//
-//        SecurityContextHolder.getContext().setAuthentication(authentication);
-//        String jwt = TOKEN_PREFIX +  tokenProvider.generateToken(authentication);
-//
-//        return ResponseEntity.ok(new JWTLoginSuccessResponse(true, jwt));
-        return null;
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginRequest.getUsername(),
+                        loginRequest.getPassword()
+                )
+        );
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = TOKEN_PREFIX +  tokenProvider.generateToken(authentication);
+
+        return ResponseEntity.ok(new JWTResponse(true, jwt));
     }
 
     @GetMapping
@@ -84,7 +90,7 @@ public class PersonController {
 
 
     @PostMapping
-    public ResponseEntity<?> store(@Valid @RequestBody NewPersonDTO person, BindingResult result){
+    public ResponseEntity<?> register(@Valid @RequestBody NewPersonDTO person, BindingResult result){
         ResponseEntity<?> errorMap = mapValidationErrorHandler.MapValidationService(result);
         if(errorMap != null)return errorMap;
 
@@ -115,6 +121,14 @@ public class PersonController {
         return new ResponseEntity<String>("Project '"+id+"' deleted", HttpStatus.OK);
     }
 
+}
+
+@Getter
+@Setter
+@AllArgsConstructor
+class JWTResponse {
+    private boolean status;
+    private String token;
 }
 
 @Getter @Setter

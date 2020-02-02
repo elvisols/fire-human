@@ -11,7 +11,9 @@ import com.fire.human.repository.PersonRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -21,13 +23,14 @@ public class PersonServiceImpl implements PersonService {
 
     private final PersonRepository personRepository;
     private final HobbyRepository hobbyRepository;
-//    private final BCryptPasswordEncoder encoder;
+    private final BCryptPasswordEncoder encoder;
     private final PersonMapper personMapper;
     private final NewPersonMapper newPersonMapper;
 
-    public PersonServiceImpl(NewPersonMapper newPersonMapper, PersonMapper personMapper, PersonRepository personRepository, HobbyRepository hobbyRepository) {
+    public PersonServiceImpl(NewPersonMapper newPersonMapper, PersonMapper personMapper, BCryptPasswordEncoder encoder, PersonRepository personRepository, HobbyRepository hobbyRepository) {
         this.personRepository = personRepository;
         this.personMapper = personMapper;
+        this.encoder = encoder;
         this.newPersonMapper = newPersonMapper;
         this.hobbyRepository = hobbyRepository;
     }
@@ -38,7 +41,7 @@ public class PersonServiceImpl implements PersonService {
 
         Person person = newPersonMapper.toEntity(personDTO);
 
-//        person.setPassword(encoder.encode(person.getPassword()));
+        person.setPassword(encoder.encode(person.getPassword()));
 
         log.info("Saving Person...{} Hobbies: {}", person, person.getHobbies());
 

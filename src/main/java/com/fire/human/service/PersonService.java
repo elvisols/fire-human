@@ -4,6 +4,9 @@ import com.fire.human.model.dto.NewPersonDTO;
 import com.fire.human.model.dto.PersonDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.Optional;
 
@@ -33,4 +36,5 @@ public interface PersonService {
      * Delete person by Id.
      */
     void delete(Long id);
+
 }
