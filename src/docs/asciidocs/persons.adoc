@@ -1,0 +1,31 @@
+== Person REST API
+Person-Controller
+
+=== Get Persons
+This endpoint returns all the persons registered as humans.
+
+==== Sample Request structure
+include::{snippets}/person-controller-tests/get-persons-test/request-parameters.adoc[]
+
+[source,python]
+include::{snippets}/person-controller-tests/get-persons-test/http-request.adoc[]
+
+==== Sample Response structure
+include::{snippets}/person-controller-tests/get-persons-test/response-fields.adoc[]
+[source,json]
+include::{snippets}/person-controller-tests/get-persons-test/response-body.adoc[]
+
+
+=== Get Person
+This endpoint returns a registered person.
+
+==== Sample Request structure
+include::{snippets}/person-controller-tests/get-person-test/path-parameters.adoc[]
+
+[source,python]
+include::{snippets}/person-controller-tests/get-person-test/http-request.adoc[]
+
+==== Sample Response structure
+include::{snippets}/person-controller-tests/get-person-test/response-fields.adoc[]
+[source,json]
+include::{snippets}/person-controller-tests/get-person-test/response-body.adoc[]

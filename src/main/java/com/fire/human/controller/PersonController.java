@@ -74,6 +74,8 @@ public class PersonController {
     public ResponseEntity<?> getAllPersons(Pageable pageable) {
         Page<PersonDTO> personDTOs = personService.findAll(pageable);
 
+        System.out.println(personDTOs);
+
         return new ResponseEntity<ResponseWrapper>(new ResponseWrapper(personDTOs), HttpStatus.OK);
     }
 
@@ -87,7 +89,6 @@ public class PersonController {
 
         return personDTO.get();
     }
-
 
     @PostMapping
     public ResponseEntity<?> register(@Valid @RequestBody NewPersonDTO person, BindingResult result){
@@ -118,7 +119,7 @@ public class PersonController {
     public ResponseEntity<?> delete(@PathVariable Long id) {
         personService.delete(id);
 
-        return new ResponseEntity<String>("Project '"+id+"' deleted", HttpStatus.OK);
+        return new ResponseEntity<String>("Person deleted! :(", HttpStatus.OK);
     }
 
 }

@@ -20,6 +20,8 @@
         <db.username>sa</db.username>
         <db.password></db.password>
         <mapstruct.version>1.2.0.Final</mapstruct.version>
+        <asciidoctor-plugin.version>1.5.8</asciidoctor-plugin.version>
+        <snippetsDirectory>${project.build.directory}/generated-snippets</snippetsDirectory>
     </properties>
 
     <dependencies>
@@ -81,14 +83,23 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <!-- Restdocs Jars -->
         <dependency>
             <groupId>org.springframework.restdocs</groupId>
             <artifactId>spring-restdocs-mockmvc</artifactId>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <!--<version>4.12</version>-->
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -128,7 +139,7 @@
             <plugin>
                 <groupId>org.asciidoctor</groupId>
                 <artifactId>asciidoctor-maven-plugin</artifactId>
-                <version>1.5.8</version>
+                <version>${asciidoctor-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>generate-docs</id>
@@ -139,16 +150,15 @@
                         <configuration>
                             <backend>html</backend>
                             <doctype>book</doctype>
+                            <sourceHighlighter>coderay</sourceHighlighter>
+                            <attributes>
+                                <snippets>${snippetsDirectory}</snippets>
+                            </attributes>
+                            <sourceDirectory>src/docs/asciidocs</sourceDirectory>
+                            <outputDirectory>target/generated-docs</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.springframework.restdocs</groupId>
-                        <artifactId>spring-restdocs-asciidoctor</artifactId>
-                        <version>${spring-restdocs.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
         </plugins>
     </build>

@@ -21,6 +21,8 @@ public class JwtTokenProvider {
 
         Date expiryDate = new Date(now.getTime()+EXPIRATION_TIME);
 
+        System.out.println("Token to expire: " + expiryDate);
+
         String userId = Long.toString(person.getId());
 
         Map<String, Object> claims = new HashMap<>();
@@ -69,5 +71,15 @@ public class JwtTokenProvider {
                 .getBody();
 
         return claims.get("username", String.class);
+    }
+
+    public static String createToken(String username) {
+        String jwt = Jwts.builder()
+                .setSubject(username)
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .signWith(SignatureAlgorithm.HS512, SECRET)
+                .compact();
+
+        return jwt;
     }
 }
