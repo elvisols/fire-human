@@ -2,12 +2,12 @@
 
 This is a simple (Java) Spring boot application that stores, updates, retrieves, and deletes Person Entity. 
 
-##### Application Requirements:
+### Application Requirements:
 - Java 8
 - Maven 3+
 - Internet Connection
 
-##### Application Deployment:
+### Application Deployment:
 Follow the steps below, from the project source, to run the application.
 ```
 ~$ mvn clean package
