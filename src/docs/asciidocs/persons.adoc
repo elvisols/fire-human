@@ -45,7 +45,7 @@ include::{snippets}/person-controller-tests/get-person-test/response-body.adoc[]
 include::{snippets}/person-controller-tests/get-person-test/response-fields.adoc[]
 
 === Store Person
-This endpoint returns the just created person.
+This endpoint stores and returns the just created person.
 
 ==== Sample Request structure
 [source,json]
@@ -59,7 +59,7 @@ include::{snippets}/person-controller-tests/store-person-test/response-body.adoc
 include::{snippets}/person-controller-tests/store-person-test/response-fields.adoc[]
 
 === Update Person
-This endpoint returns the updated person.
+This endpoint updates and returns the updated person.
 
 ==== Sample Request structure
 include::{snippets}/person-controller-tests/update-person-test/path-parameters.adoc[]
