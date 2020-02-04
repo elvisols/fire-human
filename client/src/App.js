@@ -6,16 +6,52 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
+import Landing from "./components/Layout/Landing";
+import Register from "./components/UserManagement/Register";
+import Login from "./components/UserManagement/Login";
 
 function App() {
   return (
-    <div className="App">
-      hello world.
-      {
-        <Header />
-        // <Dashboard />
-      }
-    </div>
+    <Provider store={store}>
+      <Router>
+        <div className="App">
+          <Header />
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
+
+          {
+            // private route
+          }
+          {
+            // <Switch>
+            //   <SecuredRoute exact path="/dashboard" component={Dashboard} />
+            //   <SecuredRoute exact path="/addProject" component={AddProject} />
+            //   <SecuredRoute
+            //     exact
+            //     path="/editProject/:identifier"
+            //     component={EditProject}
+            //   />
+            //   <SecuredRoute
+            //     exact
+            //     path="/projectBoard/:identifier"
+            //     component={ProjectBoard}
+            //   />
+            //   <SecuredRoute
+            //     exact
+            //     path="/addProjectTask/:identifier"
+            //     component={AddProjectTask}
+            //   />
+            //   <SecuredRoute
+            //     exact
+            //     path="/updateProjectTask/:backlog_id/:pt_id"
+            //     component={UpdateProjectTask}
+            //   />
+            // </Switch>
+          }
+        </div>
+      </Router>
+    </Provider>
   );
 }
 
