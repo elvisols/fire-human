@@ -4,14 +4,17 @@ import Dashboard from "./components/Dashboard";
 import Header from "./components/Layout/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Provider } from "react-redux"; 
+import { Provider } from "react-redux";
 import store from "./store";
 
 function App() {
   return (
     <div className="App">
-      <Header />
-      <Dashboard />
+      hello world.
+      {
+        <Header />
+        // <Dashboard />
+      }
     </div>
   );
 }

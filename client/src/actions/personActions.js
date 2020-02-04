@@ -18,9 +18,9 @@ export const createPerson = (person, history) => async dispatch => {
 };
 
 // TODO:: add person Id to edit
-export const editperson = (person, history) => async dispatch => {
+export const editPerson = (id, person, history) => async dispatch => {
   try {
-    const res = await axios.put("/api/persons", person);
+    const res = await axios.put(`/api/persons/${id}`, person);
     history.push("/dashboard");
   } catch (err) {
     dispatch({
@@ -30,7 +30,7 @@ export const editperson = (person, history) => async dispatch => {
   }
 };
 
-export const getpersons = () => async dispatch => {
+export const getPersons = () => async dispatch => {
   const res = await axios.get("/api/persons");
   dispatch({
     type: GET_PERSONS,
@@ -38,7 +38,7 @@ export const getpersons = () => async dispatch => {
   });
 };
 
-export const getperson = (identifier, history) => async dispatch => {
+export const getPerson = (identifier, history) => async dispatch => {
   try {
     const res = await axios.get(`/api/persons/${identifier}`);
     dispatch({
@@ -50,7 +50,7 @@ export const getperson = (identifier, history) => async dispatch => {
   }
 };
 
-export const deleteperson = (identifier, history) => async dispatch => {
+export const deletePerson = (identifier, history) => async dispatch => {
   if (
     window.confirm(
       "Are you sure? This will delete the person [" +
@@ -61,7 +61,7 @@ export const deleteperson = (identifier, history) => async dispatch => {
     try {
       const res = await axios.delete(`/api/persons/${identifier}`);
       dispatch({
-        type: DELETE_person,
+        type: DELETE_PERSON,
         payload: identifier
       });
     } catch (err) {
