@@ -73,7 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .headers().frameOptions().sameOrigin().and() // to enable H2 database
+                .headers().frameOptions().sameOrigin().and() // to enable H2 database console
                 .authorizeRequests()
                 .antMatchers(
                         "/",

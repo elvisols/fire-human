@@ -248,6 +248,21 @@ public class PersonControllerTests {
     }
 
     @Test
+    public void loginFailTest() throws Exception {
+
+        String loginRequest = "{\n" +
+                            "    \"username\": \"smith@fire.com\",\n" +
+                            "    \"password\": \"password\"\n" +
+                            "}";
+
+        this.mvc.perform(post("/api/persons/login")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(loginRequest)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
     public void updatePersonTest() throws Exception {
 
         List<String> hobbies1 = Arrays.asList("ps4", "music");
@@ -342,5 +357,14 @@ public class PersonControllerTests {
                 );
 
         verify(personService, times(1)).delete(3L);
+    }
+
+    @Test
+    public void accessDeniedTest() throws Exception {
+
+        this.mvc.perform(get("/api/persons/{id}", 1)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isUnauthorized());
     }
 }

@@ -19,11 +19,11 @@ public class NewPersonValidator implements Validator {
 
         NewPersonDTO person = (NewPersonDTO) object;
 
-        if (person.getPassword().length() < 6) {
+        if (person.getPassword() != null && person.getPassword().length() < 6) {
             errors.rejectValue("password", "Length", "Password must be at least 6 characters");
         }
 
-        if (!person.getPassword().equals(person.getConfirm_password())) {
+        if (person.getPassword() != null && !person.getPassword().equals(person.getConfirm_password())) {
             errors.rejectValue("confirm_password", "Match", "Passwords must match");
         }
 
