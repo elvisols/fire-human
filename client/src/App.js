@@ -9,6 +9,7 @@ import store from "./store";
 import Landing from "./components/Layout/Landing";
 import Register from "./components/UserManagement/Register";
 import Login from "./components/UserManagement/Login";
+import AddPerson from "./components/Persons/AddPerson";
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
         <div className="App">
           <Header />
           <Route exact path="/" component={Landing} />
-          <Route exact path="/register" component={Register} />
+          <Route exact path="/register" component={AddPerson} />
           <Route exact path="/login" component={Login} />
 
           {

@@ -32,7 +32,7 @@ import java.util.Optional;
 import static com.fire.human.security.SecurityConstant.TOKEN_PREFIX;
 
 @Slf4j
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/persons")
 public class PersonController {
@@ -92,11 +92,11 @@ public class PersonController {
 
     @PostMapping
     public ResponseEntity<?> register(@Valid @RequestBody NewPersonDTO person, BindingResult result){
-        ResponseEntity<?> errorMap = mapValidationErrorHandler.MapValidationService(result);
-        if(errorMap != null)return errorMap;
-
         // Validate passwords match
         newPersonValidator.validate(person,result);
+
+        ResponseEntity<?> errorMap = mapValidationErrorHandler.MapValidationService(result);
+        if(errorMap != null)return errorMap;
 
         PersonDTO newUser = personService.save(person);
 
@@ -135,10 +135,10 @@ class JWTResponse {
 @Getter @Setter
 class LoginRequest {
 
-    @NotBlank(message = "Username cannot be blank")
+    @NotBlank(message = "*Username cannot be blank")
     private String username;
 
-    @NotBlank(message = "Password cannot be blank")
+    @NotBlank(message = "*Password cannot be blank")
     private String password;
 
 }

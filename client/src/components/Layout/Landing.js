@@ -20,10 +20,13 @@ class Landing extends Component {
               <div className="col-md-12 text-center">
                 <h1 className="display-3 mb-4">Persons Entity Management</h1>
                 <p className="lead">
-                  Create your account to join be recognized as human!
+                  Create your account and be recognized as human!
                 </p>
                 <hr />
-                <Link to="/register" className="btn btn-lg btn-primary mr-2">
+                <Link
+                  to="/register"
+                  className="btn btn-lg custom-btn-primary mr-2"
+                >
                   Sign Up
                 </Link>
                 <Link to="/login" className="btn btn-lg btn-secondary mr-2">

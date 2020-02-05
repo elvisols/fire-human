@@ -3,6 +3,7 @@ import { GET_ERRORS, GET_PERSONS, GET_PERSON, DELETE_PERSON } from "./types";
 
 export const createPerson = (person, history) => async dispatch => {
   try {
+    console.log(person);
     const res = await axios.post("/api/persons", person);
     history.push("/dashboard");
     dispatch({

@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import Select from "react-select";
 import { createPerson } from "../../actions/personActions";
-import classnames from "classnames"; // npm i classnames
+import classnames from "classnames";
 
 class AddPerson extends Component {
   constructor() {
@@ -13,7 +14,8 @@ class AddPerson extends Component {
       last_name: "",
       age: "",
       favourite_color: "",
-      hobby: [],
+      hobby: [{ name: "" }],
+      selectedOption: "",
       errors: {}
     };
 
@@ -27,9 +29,14 @@ class AddPerson extends Component {
     }
   }
 
-  onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
-  }
+  onChange = e => {
+    if (e.target == null) {
+      this.setState({ e });
+      this.setState({ favourite_color: e.value });
+    } else {
+      this.setState({ [e.target.name]: e.target.value });
+    }
+  };
 
   onSubmit(e) {
     e.preventDefault();
@@ -38,14 +45,47 @@ class AddPerson extends Component {
       last_name: this.state.last_name,
       age: this.state.age,
       favourite_color: this.state.favourite_color,
-      hobby: this.state.hobby
+      hobby: Array.from(this.state.hobby, x => x.name)
     };
+
+    console.log(newPerson);
 
     this.props.createPerson(newPerson, this.props.history);
   }
 
+  handleHobbyChange = idx => evt => {
+    const newHobby = this.state.hobby.map((item, sidx) => {
+      if (idx !== sidx) return item;
+      return { ...item, name: evt.target.value };
+    });
+
+    this.setState({ hobby: newHobby });
+  };
+
+  handleAddHobby = () => {
+    this.setState({
+      hobby: this.state.hobby.concat([{ name: "" }])
+    });
+  };
+
+  handleRemoveHobby = idx => () => {
+    this.setState({
+      hobby: this.state.hobby.filter((s, sidx) => idx !== sidx)
+    });
+  };
+
   render() {
     const { errors } = this.state;
+    const options = [
+      { value: "red", label: "Red" },
+      { value: "orange", label: "Orange" },
+      { value: "yellow", label: "Yellow" },
+      { value: "green", label: "Green" },
+      { value: "blue", label: "Blue" },
+      { value: "indigo", label: "Indigo" },
+      { value: "violet", label: "Violet" },
+      { value: "other", label: "Other" }
+    ];
 
     return (
       <div>
@@ -90,7 +130,7 @@ class AddPerson extends Component {
                   </div>
                   <div className="form-group">
                     <input
-                      type="text"
+                      type="number"
                       className={classnames("form-control form-control-lg", {
                         "is-invalid": errors.age
                       })}
@@ -98,44 +138,68 @@ class AddPerson extends Component {
                       name="age"
                       value={this.state.age}
                       onChange={this.onChange}
-                      disabled
                     />
                     {errors.age && (
                       <div className="invalid-feedback">{errors.age}</div>
                     )}
                   </div>
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      className={classnames("form-control form-control-lg", {
-                        "is-invalid": errors.favourite_color
-                      })}
-                      placeholder="Person Favourite Colour"
-                      name="favourite_color"
-                      value={this.state.favourite_color}
-                      onChange={this.onChange}
-                      disabled
-                    />
+                  <h6>
+                    Favourite Colour
                     {errors.favourite_color && (
                       <div className="invalid-feedback">
                         {errors.favourite_color}
                       </div>
                     )}
-                  </div>
-                  <h6>Hobbies</h6>
-                  <div className="form-group">
-                    <input
-                      type="select"
-                      className="form-control form-control-lg"
-                      name="hobby"
-                      value={this.state.hobby}
-                      onChange={this.onChange}
-                    />
-                  </div>
+                  </h6>
 
+                  <div
+                    className={classnames("form-group", {
+                      "is-invalid": errors.favourite_color
+                    })}
+                  >
+                    <Select options={options} onChange={this.onChange} />
+                  </div>
+                  {errors.favourite_color && (
+                    <div className="invalid-feedback">
+                      {errors.favourite_color}
+                    </div>
+                  )}
+                  <br />
+                  <h6>Hobbies</h6>
+                  {this.state.hobby.map((item, idx) => (
+                    <div className="form-group">
+                      <input
+                        type="text"
+                        className={classnames("form-control form-control-lg", {
+                          "is-invalid": errors.hobby
+                        })}
+                        name="hobby"
+                        value={item.name}
+                        placeholder={`Hobby #${idx + 1}`}
+                        onChange={this.handleHobbyChange(idx)}
+                      />
+                      {errors.hobby && (
+                        <div className="invalid-feedback">{errors.hobby}</div>
+                      )}
+                      <button
+                        type="button"
+                        onClick={this.handleRemoveHobby(idx)}
+                        className="small"
+                      >
+                        -
+                      </button>
+                    </div>
+                  ))}
+                  <button
+                    type="button"
+                    onClick={this.handleAddHobby}
+                    className="small"
+                  >
+                    Add Hobby
+                  </button>
                   <input
                     type="submit"
-                    className="btn btn-primary btn-block mt-4"
+                    className="btn custom-btn-primary btn-block mt-4"
                   />
                 </form>
               </div>
@@ -148,7 +212,7 @@ class AddPerson extends Component {
 }
 
 AddPerson.propTypes = {
-  createPerson: PropTypes.func.isRequired, // i.e createPerson is a required propType func => setting constrainst ensuring it must be there
+  createPerson: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired
 };
 

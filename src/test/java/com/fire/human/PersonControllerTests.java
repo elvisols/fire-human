@@ -154,6 +154,7 @@ public class PersonControllerTests {
                 "    \"favourite_color\": \"blue\",\n" +
                 "    \"username\": \"bfoe@fire.com\",\n" +
                 "    \"password\": \"password\",\n" +
+                "    \"confirm_password\": \"password\",\n" +
                 "    \"hobby\": [\n" +
                 "        \"tennis\", \"ps4\", \"music\"\n" +
                 "    ]\n" +
@@ -186,6 +187,9 @@ public class PersonControllerTests {
                                         fieldWithPath("password").description("Person login password")
                                                 .type(JsonFieldType.STRING)
                                                 .attributes(key("constraints").value(constraintDescriptions.descriptionsForProperty("password"))),
+                                        fieldWithPath("confirm_password").description("Person login confirmation password")
+                                                .type(JsonFieldType.STRING)
+                                                .attributes(key("constraints").value(constraintDescriptions.descriptionsForProperty("confirm_password"))),
                                         fieldWithPath("age").description("Person age")
                                                 .type(JsonFieldType.NUMBER)
                                                 .attributes(key("constraints").value(constraintDescriptions.descriptionsForProperty("age"))),

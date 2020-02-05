@@ -9,7 +9,10 @@ import lombok.Setter;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,17 +25,21 @@ public class PersonDTO {
 
     private Long id;
 
-    @NotBlank(message = ">Please enter your first name")
+    @NotBlank(message = "*Please enter your first name")
     private String first_name;
 
-    @NotBlank(message = ">Please enter your last name")
+    @NotBlank(message = "*Please enter your last name")
     private String last_name;
 
+    @NotNull(message = "*Please enter your age")
+    @Digits(message = "*Your age must be an integer value", integer = 10, fraction = 0)
     private Integer age;
 
+    @NotBlank(message = "*Please select your favourite colour.")
     @Enumerated(value = EnumType.STRING)
     private String favourite_color;
 
+    @NotEmpty(message = "*You forgot to tell us your hobby.")
     private List<String> hobby = new ArrayList<>();
 
 }

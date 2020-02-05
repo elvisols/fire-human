@@ -11,7 +11,7 @@ public class NewPersonValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> aClass) {
-        return Person.class.equals(aClass);
+        return NewPersonDTO.class.equals(aClass);
     }
 
     @Override
@@ -23,8 +23,8 @@ public class NewPersonValidator implements Validator {
             errors.rejectValue("password", "Length", "Password must be at least 6 characters");
         }
 
-        if (!person.getPassword().equals(person.getConfirmPassword())) {
-            errors.rejectValue("confirmPassword", "Match", "Passwords must match");
+        if (!person.getPassword().equals(person.getConfirm_password())) {
+            errors.rejectValue("confirm_password", "Match", "Passwords must match");
         }
 
     }
