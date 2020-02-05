@@ -12,6 +12,9 @@ class AddPerson extends Component {
     this.state = {
       first_name: "",
       last_name: "",
+      username: "",
+      password: "",
+      confirm_password: "",
       age: "",
       favourite_color: "",
       hobby: [{ name: "" }],
@@ -43,6 +46,9 @@ class AddPerson extends Component {
     const newPerson = {
       first_name: this.state.first_name,
       last_name: this.state.last_name,
+      username: this.state.username,
+      password: this.state.password,
+      confirm_password: this.state.confirm_password,
       age: this.state.age,
       favourite_color: this.state.favourite_color,
       hobby: Array.from(this.state.hobby, x => x.name)
@@ -126,6 +132,53 @@ class AddPerson extends Component {
                     />
                     {errors.last_name && (
                       <div className="invalid-feedback">{errors.last_name}</div>
+                    )}
+                  </div>
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      className={classnames("form-control form-control-lg", {
+                        "is-invalid": errors.username
+                      })}
+                      placeholder="Person Account Username"
+                      name="username"
+                      value={this.state.username}
+                      onChange={this.onChange}
+                    />
+                    {errors.username && (
+                      <div className="invalid-feedback">{errors.username}</div>
+                    )}
+                  </div>
+                  <div className="form-group">
+                    <input
+                      type="password"
+                      className={classnames("form-control form-control-lg", {
+                        "is-invalid": errors.password
+                      })}
+                      placeholder="Person Password"
+                      name="password"
+                      value={this.state.password}
+                      onChange={this.onChange}
+                    />
+                    {errors.password && (
+                      <div className="invalid-feedback">{errors.password}</div>
+                    )}
+                  </div>
+                  <div className="form-group">
+                    <input
+                      type="password"
+                      className={classnames("form-control form-control-lg", {
+                        "is-invalid": errors.confirm_password
+                      })}
+                      placeholder="Confirm Password"
+                      name="confirm_password"
+                      value={this.state.confirm_password}
+                      onChange={this.onChange}
+                    />
+                    {errors.confirm_password && (
+                      <div className="invalid-feedback">
+                        {errors.confirm_password}
+                      </div>
                     )}
                   </div>
                   <div className="form-group">
