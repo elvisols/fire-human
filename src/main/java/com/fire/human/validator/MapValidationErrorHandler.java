@@ -1,4 +1,4 @@
-package com.fire.human.utils;
+package com.fire.human.validator;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

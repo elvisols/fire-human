@@ -1,7 +1,7 @@
 package com.fire.human.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fire.human.validator.NotEmptyList;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,8 +39,7 @@ public class PersonDTO {
     @Enumerated(value = EnumType.STRING)
     private String favourite_color;
 
-    @NotEmpty(message = "*You forgot to tell us your hobby.")
-    // TODO: @annotate this field to prevent empty values sent from the client!
+    @NotEmptyList(message = "*You forgot to tell us your hobby.")
     private List<String> hobby = new ArrayList<>();
 
 }

@@ -45,6 +45,7 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.requestF
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.*;
 import static org.springframework.restdocs.snippet.Attributes.key;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -199,7 +200,7 @@ public class PersonControllerTests {
                                         fieldWithPath("hobby").description("List of person's hobbies")
                                                 .type(JsonFieldType.ARRAY)
                                                 .optional()
-                                                .attributes(key("constraints").value(constraintDescriptions.descriptionsForProperty("hobby")))
+                                                .attributes(key("constraints").value("Not empty"))
                                 ),
                                 responseFields(
                                         fieldWithPath("id").description("Person auto generated ID").type(JsonFieldType.NUMBER),
@@ -327,7 +328,7 @@ public class PersonControllerTests {
                                         fieldWithPath("hobby").description("List of person's hobbies")
                                                 .type(JsonFieldType.ARRAY)
                                                 .optional()
-                                                .attributes(key("constraints").value(constraintDescriptions.descriptionsForProperty("hobby")))
+                                                .attributes(key("constraints").value("Not Empty"))
                                 ),
                                 responseFields(
                                         fieldWithPath("id").description("Person auto generated ID").type(JsonFieldType.NUMBER),
@@ -367,6 +368,7 @@ public class PersonControllerTests {
         this.mvc.perform(get("/api/persons/{id}", 1)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isUnauthorized());
+                .andExpect(status().isUnauthorized())
+                .andDo(print());
     }
 }

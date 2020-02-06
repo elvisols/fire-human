@@ -1,6 +1,5 @@
-package com.fire.human.utils;
+package com.fire.human.validator;
 
-import com.fire.human.model.Person;
 import com.fire.human.model.dto.NewPersonDTO;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;

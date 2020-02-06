@@ -1,4 +1,4 @@
-package com.fire.human.utils;
+package com.fire.human.util;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
