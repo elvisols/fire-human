@@ -10,7 +10,10 @@ This is a simple (Java) Spring boot application that stores, updates, retrieves,
 ### Application Deployment:
 Follow the steps below, from the project source, to run the application.
 ```
-~$ mvn clean package
+~$ mvn clean
+```
+```
+~$ mvn package
 ```
 ```
 ~$ mvn spring-boot:run

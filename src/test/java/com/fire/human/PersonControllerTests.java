@@ -276,8 +276,6 @@ public class PersonControllerTests {
                 "    \"last_name\": \"FoeUpdated\",\n" +
                 "    \"age\": 25,\n" +
                 "    \"favourite_color\": \"blue\",\n" +
-                "    \"username\": \"bfoe@fire.com\",\n" +
-                "    \"password\": \"password\",\n" +
                 "    \"hobby\": [\n" +
                 "        \"tennis\", \"ps4\", \"music\"\n" +
                 "    ]\n" +
@@ -309,14 +307,6 @@ public class PersonControllerTests {
                                                 .type(JsonFieldType.STRING)
                                                 .optional()
                                                 .attributes(key("constraints").value(constraintDescriptions.descriptionsForProperty("last_name"))),
-                                        fieldWithPath("username").description("Person login email address")
-                                                .type(JsonFieldType.STRING)
-                                                .optional()
-                                                .attributes(key("constraints").value(constraintDescriptions.descriptionsForProperty("username"))),
-                                        fieldWithPath("password").description("Person login password")
-                                                .type(JsonFieldType.STRING)
-                                                .optional()
-                                                .attributes(key("constraints").value(constraintDescriptions.descriptionsForProperty("password"))),
                                         fieldWithPath("age").description("Person age")
                                                 .type(JsonFieldType.NUMBER)
                                                 .optional()
