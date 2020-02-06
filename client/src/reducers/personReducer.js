@@ -18,9 +18,14 @@ export default function(state = initialState, action) {
         person: action.payload
       };
     case DELETE_PERSON:
+      const p = { person: [] };
+      p.person = state.persons.person.filter(
+        person => person.id !== action.payload
+      );
+
       return {
         ...state,
-        persons: state.persons.filter(person => person.id !== action.payload)
+        persons: p
       };
     default:
       return state;

@@ -40,6 +40,7 @@ public class PersonDTO {
     private String favourite_color;
 
     @NotEmpty(message = "*You forgot to tell us your hobby.")
+    // TODO: @annotate this field to prevent empty values sent from the client!
     private List<String> hobby = new ArrayList<>();
 
 }

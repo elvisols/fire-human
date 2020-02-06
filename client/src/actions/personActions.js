@@ -4,7 +4,7 @@ import { GET_ERRORS, GET_PERSONS, GET_PERSON, DELETE_PERSON } from "./types";
 export const createPerson = (person, history) => async dispatch => {
   try {
     console.log(person);
-    const res = await axios.post("/api/persons", person);
+    await axios.post("/api/persons", person);
     history.push("/dashboard");
     dispatch({
       type: GET_ERRORS,
@@ -18,10 +18,9 @@ export const createPerson = (person, history) => async dispatch => {
   }
 };
 
-// TODO:: add person Id to edit
 export const editPerson = (id, person, history) => async dispatch => {
   try {
-    const res = await axios.put(`/api/persons/${id}`, person);
+    await axios.put(`/api/persons/${id}`, person);
     history.push("/dashboard");
   } catch (err) {
     dispatch({
@@ -60,7 +59,7 @@ export const deletePerson = (identifier, history) => async dispatch => {
     )
   ) {
     try {
-      const res = await axios.delete(`/api/persons/${identifier}`);
+      await axios.delete(`/api/persons/${identifier}`);
       dispatch({
         type: DELETE_PERSON,
         payload: identifier

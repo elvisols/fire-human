@@ -36,9 +36,10 @@ class Dashboard extends Component {
                 <CreatePersonButton />
                 <br />
                 <hr />
-                {persons.map(person => (
-                  <PersonList key={person.id} psn={person} />
-                ))}
+                {persons.person &&
+                  persons.person.map(person => (
+                    <PersonList key={person.id} psn={person} />
+                  ))}
               </div>
             </div>
           </div>

@@ -227,6 +227,8 @@ public class PersonControllerTests {
                 .content(loginRequest)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status", Matchers.isA(Boolean.class)))
+                .andExpect(jsonPath("$.token", Matchers.startsWith("Bearer")))
                 .andDo(
                         document("{class-name}/{method-name}",
                                 preprocessRequest(prettyPrint()),

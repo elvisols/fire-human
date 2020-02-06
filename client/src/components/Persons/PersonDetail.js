@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getPerson } from "../../actions/projectActions";
+import { getPerson } from "../../actions/personActions";
 import PropTypes from "prop-types";
 
 class PersonDetail extends Component {
@@ -58,16 +58,16 @@ class PersonDetail extends Component {
                   [{this.state.first_name}] Detail
                 </h5>
                 <hr />
-                <h6>First Name:</h6>
+                <h3>First Name:</h3>
                 <div className="form-group">{this.state.first_name}</div>
-                <h6>First Last Name:</h6>
+                <h3>Last Name:</h3>
                 <div className="form-group">{this.state.last_name}</div>
-                <h6>Age</h6>
+                <h3>Age</h3>
                 <div className="form-group">{this.state.age}</div>
-                <h6>Favourite Colour</h6>
+                <h3>Favourite Colour</h3>
                 <div className="form-group">{this.state.favourite_color}</div>
-                <h6>Hobby</h6>
-                <div className="form-group">{this.state.hobby}</div>
+                <h3>Hobby</h3>
+                <div className="form-group">{this.state.hobby.join(", ")}</div>
               </div>
             </div>
           </div>

@@ -18,16 +18,16 @@ class PersonList extends Component {
               <span className="mx-auto">{psn.id}</span>
             </div>
             <div className="col-lg-6 col-md-4 col-8">
-              <h3>{psn.first_name}</h3>
-              <p>{psn.last_name}</p>
+              <h3>{psn.first_name + " " + psn.last_name}</h3>
+              <p>. . .</p>
             </div>
             <div className="col-md-4 d-none d-lg-block">
               <ul className="list-group">
-                <Link to={`/personDetail/${psn.id}`}>
+                <Link to={`/viewPerson/${psn.id}`}>
                   <li className="list-group-item board">
                     <i className="fa fa-flag-checkered pr-1">
                       {" "}
-                      View {psn.first_name} Detail{" "}
+                      View {psn.first_name}'s Detail{" "}
                     </i>
                   </li>
                 </Link>
@@ -35,7 +35,7 @@ class PersonList extends Component {
                   <li className="list-group-item update">
                     <i className="fa fa-edit pr-1">
                       {" "}
-                      Update {psn.first_name} Detail
+                      Update {psn.first_name}'s Detail
                     </i>
                   </li>
                 </Link>
