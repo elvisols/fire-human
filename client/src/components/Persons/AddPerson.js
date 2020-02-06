@@ -54,8 +54,6 @@ class AddPerson extends Component {
       hobby: Array.from(this.state.hobby, x => x.name)
     };
 
-    console.log(newPerson);
-
     this.props.createPerson(newPerson, this.props.history);
   }
 
