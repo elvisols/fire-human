@@ -17,7 +17,6 @@ import AddPerson from "./components/Persons/AddPerson";
 import EditPerson from "./components/Persons/EditPerson";
 import PersonDetail from "./components/Persons/PersonDetail";
 
-// retrieve token in store into state on each reload.
 const jwtToken = localStorage.jwtToken;
 
 if (jwtToken) {

@@ -20,7 +20,7 @@ if (window.navigator.userAgent.includes("Chrome") && ReactReduxDevTools) {
   );
 } else {
   store = createStore(
-    rootReducer, // i.e index.js in the reducer folder
+    rootReducer,
     initialState,
     compose(applyMiddleware(...middleware))
   );
