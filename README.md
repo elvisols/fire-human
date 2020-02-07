@@ -23,7 +23,7 @@ There are two ways to running the application, as follows:
 ```
 At this point your backend should be up and running else you may want to repeat the previous steps from the project source directory. 
 
-Feel free to open a new terminal to proceed with the follow steps.
+Feel free to open up a new terminal to proceed with the following steps.
 ```
 ~$ cd ./client
 ```
@@ -74,7 +74,7 @@ which contains details about each endpoints and how to consume them.
 - 8899
 
 ### Demo
-You can use the following account(s) to login or better still register one.
+You can use the following account(s) to login or better still register one!
 
 -- username: `jsmith@fire.com` | `sconnor@fire.com`
 
